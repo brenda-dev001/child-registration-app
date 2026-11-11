@@ -1,0 +1,81 @@
+
+# ==============================
+# Gradle
+# ==============================
+.gradle/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# ==============================
+# Kotlin
+# ==============================
+.kotlin/
+*.class
+*.kotlin_module
+
+# ==============================
+# Android Studio / IntelliJ IDEA
+# ==============================
+.idea/
+*.iml
+*.ipr
+*.iws
+local.properties
+captures/
+
+# ==============================
+# Android Build Files
+# ==============================
+*.apk
+*.aab
+*.ap_
+*.dex
+.externalNativeBuild/
+.cxx/
+
+# ==============================
+# Room / SQLite Databases
+# ==============================
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# ==============================
+# Environment Variables
+# ==============================
+.env
+.env.*
+!.env.example
+
+# ==============================
+# Signing Keys
+# ==============================
+*.keystore
+*.jks
+*.key
+
+# ==============================
+# Logs and Temporary Files
+# ==============================
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# ==============================
+# Operating System
+# ==============================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+.Trash-*
