@@ -2,7 +2,6 @@ package com.example.clinicofkids.ui.theme.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,11 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,12 +23,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.clinicofkids.R
+import com.example.clinicofkids.ui.theme.AccentCoral
+import com.example.clinicofkids.ui.theme.AccentYellow
 import com.example.clinicofkids.ui.theme.Background
+import com.example.clinicofkids.ui.theme.Coral
+import com.example.clinicofkids.ui.theme.Green
 import com.example.clinicofkids.ui.theme.Primary
 import com.example.clinicofkids.ui.theme.Secondary
-import com.example.clinicofkids.ui.theme.Surface
-import com.example.clinicofkids.ui.theme.TextPrimary
-import com.example.clinicofkids.ui.theme.TextSecondary
+import com.example.clinicofkids.ui.theme.Yellow
 
 @Composable
 fun MenuScreen(){
@@ -56,7 +54,7 @@ fun MenuScreen(){
                         .padding(10.dp)
                 )
                 Spacer(modifier = Modifier.size(20.dp))
-                Text("Child clinic", fontSize = 18.sp, color = TextSecondary)
+                Text("Child clinic", fontSize = 18.sp, color = Secondary)
             }
         }
         Column(modifier = Modifier.align(alignment = Alignment.Center)) {
@@ -65,8 +63,8 @@ fun MenuScreen(){
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Primary,
-                    contentColor = TextSecondary
+                    containerColor = AccentYellow,
+                    contentColor = Yellow
                 )
             ) {
                 Text(text = "Child registration", fontSize = 17.sp)
@@ -76,8 +74,8 @@ fun MenuScreen(){
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Primary,
-                    contentColor = TextSecondary
+                    containerColor = AccentCoral,
+                    contentColor = Coral
                 )
             ) {
                 Text(text = "Search for CPF", fontSize = 17.sp)
@@ -87,8 +85,8 @@ fun MenuScreen(){
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Primary,
-                    contentColor = TextSecondary
+                    containerColor = Secondary,
+                    contentColor = Green
                 )
             ) {
                 Text(text = "Statistics", fontSize = 17.sp)
