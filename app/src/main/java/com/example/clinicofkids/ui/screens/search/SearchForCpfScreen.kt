@@ -1,4 +1,4 @@
-package com.example.clinicofkids.ui.theme.screens.search
+package com.example.clinicofkids.ui.screens.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

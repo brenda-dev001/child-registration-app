@@ -1,4 +1,4 @@
-package com.example.clinicofkids.ui.theme.screens.home
+package com.example.clinicofkids.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
