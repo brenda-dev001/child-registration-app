@@ -1,4 +1,4 @@
-package com.example.clinicofkids.ui.navegation
+package com.example.clinicofkids.ui.navigation
 
 object Routes {
     const val HOME = "home"
