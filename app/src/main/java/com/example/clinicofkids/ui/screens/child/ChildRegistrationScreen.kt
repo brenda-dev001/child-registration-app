@@ -1,4 +1,4 @@
-package com.example.clinicofkids.screens.child
+package com.example.clinicofkids.ui.screens.child
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,7 +42,9 @@ import com.example.clinicofkids.ui.theme.Secondary
 import com.example.clinicofkids.ui.theme.Surface
 
 @Composable
-fun ChildRegistrationScreen(){
+fun ChildRegistrationScreen(
+    onBackClick: () -> Unit
+){
     var childCpf by remember { mutableStateOf("") }
     var childName by remember { mutableStateOf("") }
     var childAge by remember { mutableStateOf("") }
@@ -63,7 +65,7 @@ fun ChildRegistrationScreen(){
             .padding(6.dp),
             verticalArrangement = Arrangement.Top,
         ) {
-            Button(onClick = {},
+            Button(onClick = {onBackClick()},
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent
                 ),
@@ -246,5 +248,5 @@ fun ChildRegistrationScreen(){
 @Preview
 @Composable
 private fun ChildRegistrationPreview(){
-    ChildRegistrationScreen()
+    ChildRegistrationScreen(onBackClick = {})
 }

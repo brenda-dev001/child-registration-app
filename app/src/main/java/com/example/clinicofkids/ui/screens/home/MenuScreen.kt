@@ -1,4 +1,4 @@
-package com.example.clinicofkids.screens.home
+package com.example.clinicofkids.ui.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,7 +33,11 @@ import com.example.clinicofkids.ui.theme.Secondary
 import com.example.clinicofkids.ui.theme.Yellow
 
 @Composable
-fun MenuScreen(){
+fun MenuScreen(
+    onChildRegistrationClick: () -> Unit,
+    onSearchCpfClick: () -> Unit,
+    onStatisticsClick: () -> Unit
+){
     Box(modifier = Modifier.fillMaxWidth()
         .fillMaxHeight()
         .background(color = Background)
@@ -58,7 +62,7 @@ fun MenuScreen(){
             }
         }
         Column(modifier = Modifier.align(alignment = Alignment.Center)) {
-            Button(onClick = {},
+            Button(onClick = {onChildRegistrationClick()},
                 modifier = Modifier.fillMaxWidth(0.7f)
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
@@ -69,7 +73,7 @@ fun MenuScreen(){
             ) {
                 Text(text = "Child registration", fontSize = 17.sp)
             }
-            Button(onClick = {},
+            Button(onClick = {onSearchCpfClick()},
                 modifier = Modifier.fillMaxWidth(0.7f)
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
@@ -80,7 +84,7 @@ fun MenuScreen(){
             ) {
                 Text(text = "Search for CPF", fontSize = 17.sp)
             }
-            Button(onClick = {},
+            Button(onClick = {onStatisticsClick},
                 modifier = Modifier.fillMaxWidth(0.7f)
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
@@ -98,5 +102,5 @@ fun MenuScreen(){
 @Preview
 @Composable
 private fun MenuScreenPreview(){
-    MenuScreen()
+    MenuScreen(onChildRegistrationClick = {}, onSearchCpfClick = {}, onStatisticsClick = {})
 }

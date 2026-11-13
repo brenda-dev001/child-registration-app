@@ -40,7 +40,9 @@ import com.example.clinicofkids.ui.theme.Secondary
 import com.example.clinicofkids.ui.theme.Surface
 
 @Composable
-fun SearchForCpf(){
+fun SearchForCpfScreen(
+    onBackClick: () -> Unit
+){
     var cpf by remember { mutableStateOf("") }
 
     Column(modifier = Modifier.fillMaxWidth()
@@ -54,7 +56,7 @@ fun SearchForCpf(){
             .padding(6.dp),
             verticalArrangement = Arrangement.Top,
         ) {
-            Button(onClick = {},
+            Button(onClick = {onBackClick()},
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Transparent
                 ),
@@ -85,7 +87,7 @@ fun SearchForCpf(){
                 value = cpf,
                 onValueChange = {cpf = it},
                 label = {Text(text = "CPF", color = Secondary)},
-                placeholder = {Text("Enter tour cpf")},
+                placeholder = {Text("Enter your cpf")},
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.NumberPassword
                 )
@@ -109,6 +111,6 @@ fun SearchForCpf(){
 
 @Preview
 @Composable
-private fun SearchForCpfPreview(){
-    SearchForCpf()
+private fun SearchForCpfScreenPreview(){
+    SearchForCpfScreen(onBackClick = {})
 }
