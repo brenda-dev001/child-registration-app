@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -46,8 +47,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
 import com.example.clinicofkids.ui.theme.AccentCoral
 import com.example.clinicofkids.ui.theme.AccentYellow
+import com.example.clinicofkids.ui.theme.Blue
+import com.example.clinicofkids.ui.theme.Green
 import com.example.clinicofkids.ui.theme.Secondary
 import com.example.clinicofkids.ui.theme.Surface
 import com.example.clinicofkids.ui.theme.TextPrimary
@@ -82,7 +86,7 @@ fun ChildRegistrationScreen(){
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     contentDescription = null,
-                    tint = Secondary
+                    tint = Blue
                 )
             }
         }
@@ -105,7 +109,11 @@ fun ChildRegistrationScreen(){
                 value = childName,
                 onValueChange = {childName = it},
                 label = {Text(text = "child's name", color = Secondary)},
-                placeholder = {Text("Enter child's name")}
+                placeholder = {Text("Enter child's name")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text
+                )
+
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth()
@@ -120,7 +128,10 @@ fun ChildRegistrationScreen(){
                 value = childCpf,
                 onValueChange = {childCpf = it},
                 label = {Text(text = "child's CPF", color = Secondary)},
-                placeholder = {Text("Enter child's cpf")}
+                placeholder = {Text("Enter child's cpf")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.NumberPassword
+                )
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth()
@@ -135,7 +146,10 @@ fun ChildRegistrationScreen(){
                 value = childAge,
                 onValueChange = {childAge = it},
                 label = {Text(text = "child's age", color = AccentYellow)},
-                placeholder = {Text("Enter child's age")}
+                placeholder = {Text("Enter child's age")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.NumberPassword
+                )
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth()
@@ -150,7 +164,10 @@ fun ChildRegistrationScreen(){
                 value = guardiansName,
                 onValueChange = {guardiansName = it},
                 label = {Text(text = "guardian's name", color = AccentYellow)},
-                placeholder = {Text("Enter guardian' name")}
+                placeholder = {Text("Enter guardian' name")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text
+                )
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth()
@@ -165,7 +182,10 @@ fun ChildRegistrationScreen(){
                 value = guardiansCpf,
                 onValueChange = {guardiansCpf = it},
                 label = {Text(text = "guardian's cpf", color = Primary)},
-                placeholder = {Text("Enter guardian's cpf")}
+                placeholder = {Text("Enter guardian's cpf")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.NumberPassword
+                )
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth()
@@ -180,7 +200,10 @@ fun ChildRegistrationScreen(){
                 value = guardiansEmail,
                 onValueChange = {guardiansEmail = it},
                 label = {Text(text = "guardian's email", color = Primary)},
-                placeholder = {Text("Enter guardian's email")}
+                placeholder = {Text("Enter guardian's email")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email
+                )
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth()
@@ -195,7 +218,10 @@ fun ChildRegistrationScreen(){
                 value = guardiansPhone,
                 onValueChange = {guardiansPhone = it},
                 label = {Text(text = "guardian's phone", color = AccentCoral)},
-                placeholder = {Text("Enter guardian's phone")}
+                placeholder = {Text("Enter guardian's phone")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Phone
+                )
             )
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth()
@@ -211,12 +237,15 @@ fun ChildRegistrationScreen(){
                 onValueChange = {professionalName = it},
                 label = {Text(text = "professional's name", color = AccentCoral)},
                 placeholder = {Text("Enter professional's name")},
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text
+                )
             )
             Spacer(modifier = Modifier.size(10.dp))
             Button(onClick = {},
                 modifier = Modifier.align(alignment = Alignment.End),
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Primary,
+                    contentColor = Green,
                     containerColor = Secondary
                 ),
                 elevation = ButtonDefaults.buttonElevation(
