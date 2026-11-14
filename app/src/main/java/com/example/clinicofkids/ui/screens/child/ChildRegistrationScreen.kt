@@ -1,7 +1,9 @@
 package com.example.clinicofkids.ui.screens.child
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -33,17 +35,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.clinicofkids.data.model.Child
 import com.example.clinicofkids.ui.theme.AccentCoral
 import com.example.clinicofkids.ui.theme.AccentYellow
 import com.example.clinicofkids.ui.theme.Blue
+import com.example.clinicofkids.ui.theme.Error
 import com.example.clinicofkids.ui.theme.Green
 import com.example.clinicofkids.ui.theme.Secondary
+import com.example.clinicofkids.ui.theme.Success
 import com.example.clinicofkids.ui.theme.Surface
 
 @Composable
 fun ChildRegistrationScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    viewModel: ChildViewModel
 ){
     var childCpf by remember { mutableStateOf("") }
     var childName by remember { mutableStateOf("") }
@@ -53,13 +61,16 @@ fun ChildRegistrationScreen(
     var guardiansEmail by remember { mutableStateOf("") }
     var guardiansPhone by remember { mutableStateOf("") }
     var professionalName by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
-    Column(modifier = Modifier.fillMaxWidth()
+    Column(modifier = Modifier
+        .fillMaxWidth()
         .fillMaxHeight()
         .background(color = Background)
         .verticalScroll(rememberScrollState())
     ) {
-        Column(modifier = Modifier.fillMaxWidth()
+        Column(modifier = Modifier
+            .fillMaxWidth()
             .height(60.dp)
             .background(color = Primary)
             .padding(6.dp),
@@ -78,13 +89,15 @@ fun ChildRegistrationScreen(
             }
         }
         Spacer(modifier = Modifier.size(20.dp))
-        Column(modifier = Modifier.fillMaxWidth(0.9f)
+        Column(modifier = Modifier
+            .fillMaxWidth(0.9f)
             .background(color = Surface, shape = RoundedCornerShape(20.dp))
             .padding(all = 10.dp)
             .align(alignment = Alignment.CenterHorizontally),
         ) {
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -103,7 +116,8 @@ fun ChildRegistrationScreen(
 
             )
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -121,7 +135,8 @@ fun ChildRegistrationScreen(
                 )
             )
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -139,7 +154,8 @@ fun ChildRegistrationScreen(
                 )
             )
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -157,7 +173,8 @@ fun ChildRegistrationScreen(
                 )
             )
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -175,7 +192,8 @@ fun ChildRegistrationScreen(
                 )
             )
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -193,7 +211,8 @@ fun ChildRegistrationScreen(
                 )
             )
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -211,7 +230,8 @@ fun ChildRegistrationScreen(
                 )
             )
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -229,7 +249,14 @@ fun ChildRegistrationScreen(
                 )
             )
             Spacer(modifier = Modifier.size(10.dp))
-            Button(onClick = {},
+            Button(onClick = {
+                val age = childAge.toIntOrNull()
+                if (age != null){
+                    val child = Child(childCpf, childName, age, guardiansCpf,
+                        guardiansName, guardiansEmail, guardiansPhone, professionalName)
+                    viewModel.insertChild(child)
+                }
+            },
                 modifier = Modifier.align(alignment = Alignment.End),
                 colors = ButtonDefaults.buttonColors(
                     contentColor = Green,
@@ -241,12 +268,10 @@ fun ChildRegistrationScreen(
             ) {
                 Text("Insert child")
             }
+            if(viewModel.message.isNotEmpty()){
+                Toast.makeText(context, viewModel.message, Toast.LENGTH_LONG).show()
+                viewModel.clearMessage()
+            }
         }
     }
-}
-
-@Preview
-@Composable
-private fun ChildRegistrationPreview(){
-    ChildRegistrationScreen(onBackClick = {})
 }
