@@ -1,11 +1,9 @@
 package com.example.clinicofkids.ui.screens.child
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.clinicofkids.data.model.Child
@@ -26,7 +24,7 @@ class ChildViewModel(
                 message = "Child registered!"
             }catch (e: Exception){
                 message = "Error registering!"
-                Log.e("ChildViewModel", "Insert falied", e)
+                Log.e("ChildViewModel", "Insert failed", e)
             }
         }
     }
