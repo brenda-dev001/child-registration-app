@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.clinicofkids.data.repository.ChildRepository
 import com.example.clinicofkids.ui.screens.child.ChildRegistrationScreen
 import com.example.clinicofkids.ui.screens.child.ChildViewModel
 import com.example.clinicofkids.ui.screens.home.MenuScreen
