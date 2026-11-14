@@ -4,13 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.clinicofkids.data.repository.ChildRepository
 import com.example.clinicofkids.ui.screens.child.ChildRegistrationScreen
+import com.example.clinicofkids.ui.screens.child.ChildViewModel
 import com.example.clinicofkids.ui.screens.home.MenuScreen
 import com.example.clinicofkids.ui.screens.search.SearchForCpfScreen
 import com.example.clinicofkids.ui.screens.statistics.StatisticsScreen
 
 @Composable
-fun AppNavigation(){
+fun AppNavigation(
+    viewModel: ChildViewModel
+){
     val navController = rememberNavController()
 
     NavHost(
@@ -35,7 +39,8 @@ fun AppNavigation(){
             ChildRegistrationScreen(
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
+                viewModel = viewModel
             )
         }
 
