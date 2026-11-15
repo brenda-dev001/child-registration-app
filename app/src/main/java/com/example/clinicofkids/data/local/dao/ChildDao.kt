@@ -16,4 +16,7 @@ interface ChildDao {
     @Query("SELECT * FROM tb_children WHERE cpf = :cpf")
     suspend fun getChildByCpf(cpf : String) : Child
 
+    @Query("SELECT * FROM tb_children WHERE guardianCpf = :cpf")
+    suspend fun getGuardianByCpf(cpf: String) : List<Child>
+
 }
