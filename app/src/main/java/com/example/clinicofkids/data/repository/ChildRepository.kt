@@ -9,4 +9,8 @@ class ChildRepository(
     suspend fun insertChild(child: Child){
         childDao.insertChild(child)
     }
+
+    suspend fun getAll() : List<Child>{
+        return childDao.getAll()
+    }
 }
