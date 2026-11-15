@@ -113,6 +113,7 @@ fun SearchForCpfScreen(
                 if(cpf.isNotBlank()){
                     isSearching = true
                     viewModel.getChildByCpf(cpf)
+                    viewModel.getGuardianByCpf(cpf)
                 }else{
                     isSearching = false
                 }
@@ -130,84 +131,155 @@ fun SearchForCpfScreen(
             }
         }
         if(isSearching){
-            viewModel.child?.let { child ->
-                ChildCard(child)
+            if(viewModel.child != null && viewModel.list.isEmpty()){
+                viewModel.child?.let { child ->
+                    ChildCard(child)
+                }
+            }else if(viewModel.list.isNotEmpty()){
+                guardianList(children = viewModel.list, modifier = Modifier.weight(1f).align(alignment = Alignment.CenterHorizontally))
             }
         }else{
-            LazyColumn(modifier = Modifier
-                .weight(1f)
-                .align(alignment = Alignment.CenterHorizontally),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+            LaunchedEffect(Unit) {
+                viewModel.getAll()
+            }
+            ChildList(children = viewModel.list, modifier = Modifier.weight(1f).align(alignment = Alignment.CenterHorizontally))
+        }
+        Spacer(modifier = Modifier.size(10.dp))
+    }
+}
+
+@Composable
+private fun guardianList(children : List<Child>, modifier: Modifier){
+    LazyColumn(modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(children){children ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .background(color = Surface, shape = RoundedCornerShape(12.dp))
+                    .border(width = 1.dp, color = Green, shape = RoundedCornerShape(12.dp))
+                    .padding(10.dp)
             ) {
-                items(viewModel.list){children ->
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(0.9f)
-                            .background(color = Surface, shape = RoundedCornerShape(12.dp))
-                            .border(width = 1.dp, color = Green, shape = RoundedCornerShape(12.dp))
-                            .padding(10.dp)
-                            .align(alignment = Alignment.CenterHorizontally)
+                Column(modifier = Modifier.fillMaxWidth()
+                    .background(color = Secondary, shape = RoundedCornerShape(5.dp))
+                    .padding(7.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = children.guardianName, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Green)
+                }
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Guardian CPF: ${children.guardianCpf}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Email: ${children.guardianEmail}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Phone: ${children.guardianPhone}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Child name: ${children.name}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Child CPF: ${children.cpf}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(3.dp))
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Button(onClick = {},
+                        modifier = Modifier.height(35.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Yellow,
+                            containerColor = AccentYellow
+                        ),
+                        elevation = ButtonDefaults.buttonElevation(
+                            defaultElevation = 2.dp
+                        ),
+                        shape = RoundedCornerShape(10.dp)
                     ) {
-                        Column(modifier = Modifier.fillMaxWidth()
-                            .background(color = Secondary, shape = RoundedCornerShape(5.dp))
-                            .padding(7.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(text = children.name, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Green)
-                        }
-                        Spacer(modifier = Modifier.size(5.dp))
-                        Text(text = "CPF: ${children.cpf}", fontSize = 16.sp)
-                        Spacer(modifier = Modifier.size(5.dp))
-                        Text(text = "Age: ${children.age}", fontSize = 16.sp)
-                        Spacer(modifier = Modifier.size(5.dp))
-                        Text(text = "Guardian CPF: ${children.guardianCpf}", fontSize = 16.sp)
-                        Spacer(modifier = Modifier.size(5.dp))
-                        Text(text = "Guardian name: ${children.guardianName}", fontSize = 16.sp)
-                        Spacer(modifier = Modifier.size(5.dp))
-                        Text(text = "Professional name: ${children.professionalName}", fontSize = 16.sp)
-                        Spacer(modifier = Modifier.size(3.dp))
-                        Row(modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-                            Button(onClick = {},
-                                modifier = Modifier.height(35.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    contentColor = Yellow,
-                                    containerColor = AccentYellow
-                                ),
-                                elevation = ButtonDefaults.buttonElevation(
-                                    defaultElevation = 2.dp
-                                ),
-                                shape = RoundedCornerShape(10.dp)
-                            ) {
-                                Text(text = "Edit")
-                            }
-                            Spacer(modifier = Modifier.size(5.dp))
-                            Button(onClick = {},
-                                modifier = Modifier.height(35.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    contentColor = Coral,
-                                    containerColor = AccentCoral
-                                ),
-                                elevation = ButtonDefaults.buttonElevation(
-                                    defaultElevation = 2.dp
-                                ),
-                                shape = RoundedCornerShape(10.dp)
-                            ) {
-                                Text(text = "Delete")
-                            }
-                        }
+                        Text(text = "Edit")
+                    }
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Button(onClick = {},
+                        modifier = Modifier.height(35.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Coral,
+                            containerColor = AccentCoral
+                        ),
+                        elevation = ButtonDefaults.buttonElevation(
+                            defaultElevation = 2.dp
+                        ),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Text(text = "Delete")
                     }
                 }
             }
         }
-        Spacer(modifier = Modifier.size(40.dp))
-        LaunchedEffect(Unit) {
-            viewModel.getAll()
+    }
+}
+@Composable
+private fun ChildList(children : List<Child>, modifier: Modifier){
+    LazyColumn(modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        items(children){children ->
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .background(color = Surface, shape = RoundedCornerShape(12.dp))
+                    .border(width = 1.dp, color = Green, shape = RoundedCornerShape(12.dp))
+                    .padding(10.dp)
+            ) {
+                Column(modifier = Modifier.fillMaxWidth()
+                    .background(color = Secondary, shape = RoundedCornerShape(5.dp))
+                    .padding(7.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = children.name, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Green)
+                }
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "CPF: ${children.cpf}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Age: ${children.age}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Guardian CPF: ${children.guardianCpf}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Guardian name: ${children.guardianName}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(5.dp))
+                Text(text = "Professional name: ${children.professionalName}", fontSize = 16.sp)
+                Spacer(modifier = Modifier.size(3.dp))
+                Row(modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Button(onClick = {},
+                        modifier = Modifier.height(35.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Yellow,
+                            containerColor = AccentYellow
+                        ),
+                        elevation = ButtonDefaults.buttonElevation(
+                            defaultElevation = 2.dp
+                        ),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Text(text = "Edit")
+                    }
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Button(onClick = {},
+                        modifier = Modifier.height(35.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = Coral,
+                            containerColor = AccentCoral
+                        ),
+                        elevation = ButtonDefaults.buttonElevation(
+                            defaultElevation = 2.dp
+                        ),
+                        shape = RoundedCornerShape(10.dp)
+                    ) {
+                        Text(text = "Delete")
+                    }
+                }
+            }
         }
     }
 }
-
 @Composable
 private fun ChildCard(child: Child){
 
