@@ -1,14 +1,22 @@
 package com.example.clinicofkids.ui.screens.search
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -22,6 +30,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,28 +38,40 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.clinicofkids.ui.screens.child.ChildViewModel
+import com.example.clinicofkids.ui.theme.AccentCoral
+import com.example.clinicofkids.ui.theme.AccentYellow
 import com.example.clinicofkids.ui.theme.Background
 import com.example.clinicofkids.ui.theme.Blue
+import com.example.clinicofkids.ui.theme.Coral
 import com.example.clinicofkids.ui.theme.Green
 import com.example.clinicofkids.ui.theme.Primary
 import com.example.clinicofkids.ui.theme.Secondary
 import com.example.clinicofkids.ui.theme.Surface
+import com.example.clinicofkids.ui.theme.Yellow
 
 @Composable
 fun SearchForCpfScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    viewModel : ChildViewModel
 ){
     var cpf by remember { mutableStateOf("") }
 
-    Column(modifier = Modifier.fillMaxWidth()
+    Column(modifier = Modifier
+        .fillMaxWidth()
         .fillMaxHeight()
         .background(color = Background)
-        .verticalScroll(rememberScrollState())
     ) {
-        Column(modifier = Modifier.fillMaxWidth()
+        Column(modifier = Modifier
+            .fillMaxWidth()
             .height(60.dp)
             .background(color = Primary)
             .padding(6.dp),
@@ -69,13 +90,15 @@ fun SearchForCpfScreen(
             }
         }
         Spacer(modifier = Modifier.size(20.dp))
-        Column(modifier = Modifier.fillMaxWidth(0.9f)
+        Column(modifier = Modifier
+            .fillMaxWidth(0.9f)
             .background(color = Surface, shape = RoundedCornerShape(20.dp))
             .padding(all = 10.dp)
             .align(alignment = Alignment.CenterHorizontally),
         ) {
             OutlinedTextField(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .height(58.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = Background,
@@ -106,11 +129,76 @@ fun SearchForCpfScreen(
                 Text("Insert child")
             }
         }
-    }
-}
+        Spacer(modifier = Modifier.size(40.dp))
+        LaunchedEffect(Unit) {
+            viewModel.getAll()
+        }
 
-@Preview
-@Composable
-private fun SearchForCpfScreenPreview(){
-    SearchForCpfScreen(onBackClick = {})
+        LazyColumn(modifier = Modifier
+            .weight(1f)
+            .align(alignment = Alignment.CenterHorizontally),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(viewModel.list){children ->
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .background(color = Surface, shape = RoundedCornerShape(12.dp))
+                        .border(width = 1.dp, color = Green, shape = RoundedCornerShape(12.dp))
+                        .padding(10.dp)
+                        .align(alignment = Alignment.CenterHorizontally)
+                ) {
+                    Column(modifier = Modifier.fillMaxWidth()
+                        .background(color = Secondary, shape = RoundedCornerShape(5.dp))
+                        .padding(7.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(text = children.name, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Green)
+                    }
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Text(text = "CPF: ${children.cpf}", fontSize = 16.sp)
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Text(text = "Age: ${children.age}", fontSize = 16.sp)
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Text(text = "Guardian CPF: ${children.guardianCpf}", fontSize = 16.sp)
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Text(text = "Guardian name: ${children.guardianName}", fontSize = 16.sp)
+                    Spacer(modifier = Modifier.size(5.dp))
+                    Text(text = "Professional name: ${children.professionalName}", fontSize = 16.sp)
+                    Spacer(modifier = Modifier.size(3.dp))
+                    Row(modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Button(onClick = {},
+                            modifier = Modifier.height(35.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                contentColor = Yellow,
+                                containerColor = AccentYellow
+                            ),
+                            elevation = ButtonDefaults.buttonElevation(
+                                defaultElevation = 2.dp
+                            ),
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Text(text = "Edit")
+                        }
+                        Spacer(modifier = Modifier.size(5.dp))
+                        Button(onClick = {},
+                            modifier = Modifier.height(35.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                contentColor = Coral,
+                                containerColor = AccentCoral
+                            ),
+                            elevation = ButtonDefaults.buttonElevation(
+                                defaultElevation = 2.dp
+                            ),
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Text(text = "Delete")
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
