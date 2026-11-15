@@ -17,4 +17,8 @@ class ChildRepository(
     suspend fun getChildByCpf(cpf: String) : Child{
         return childDao.getChildByCpf(cpf)
     }
+
+    suspend fun getGuardianByCpf(cpf: String) : List<Child>{
+        return childDao.getGuardianByCpf(cpf)
+    }
 }
