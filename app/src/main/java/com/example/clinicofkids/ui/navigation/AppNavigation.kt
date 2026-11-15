@@ -47,7 +47,8 @@ fun AppNavigation(
             SearchForCpfScreen(
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
+                viewModel = viewModel
             )
         }
         composable(Routes.STATISTICS){
