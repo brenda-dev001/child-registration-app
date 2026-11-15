@@ -9,9 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.clinicofkids.data.model.Child
 import com.example.clinicofkids.data.repository.ChildRepository
 import kotlinx.coroutines.launch
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 
 class ChildViewModel(
     private val repository: ChildRepository
@@ -22,6 +19,8 @@ class ChildViewModel(
 
     var list by mutableStateOf<List<Child>>(emptyList())
         private set
+
+    var child by mutableStateOf<Child?>(null)
 
     fun insertChild(child: Child){
         viewModelScope.launch {
@@ -41,6 +40,16 @@ class ChildViewModel(
                 list = repository.getAll()
             }catch (e: Exception){
                 Log.e("ChildViewModel", "Failed to load children", e)
+            }
+        }
+    }
+
+    fun getChildByCpf(cpf: String){
+        viewModelScope.launch {
+            try {
+                child = repository.getChildByCpf(cpf)
+            }catch (e: Exception){
+                Log.e("ChildViewModel", "Search failed", e)
             }
         }
     }
