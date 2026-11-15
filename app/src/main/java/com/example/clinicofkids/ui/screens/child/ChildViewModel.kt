@@ -54,6 +54,16 @@ class ChildViewModel(
         }
     }
 
+    fun getGuardianByCpf(cpf: String){
+        viewModelScope.launch {
+            try {
+                list = repository.getGuardianByCpf(cpf)
+            }catch (e : Exception){
+                Log.e("ChildViewModel", "Search failed", e)
+            }
+        }
+    }
+
     fun clearMessage(){
         message = ""
     }
