@@ -23,7 +23,4 @@ interface ChildDao {
     @Update
     suspend fun updateChild(child: Child)
 
-    @Update
-    suspend fun updateGuardian(child: Child)
-
 }
