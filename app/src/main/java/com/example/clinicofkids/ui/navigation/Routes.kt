@@ -6,4 +6,5 @@ object Routes {
     const val SEARCHCPF = "searchCpf"
     const val STATISTICS = "statistics"
     const val UPDATECHILD = "updateChild"
+    const val UPDATEGUARDIAN = "updateGuardian"
 }
