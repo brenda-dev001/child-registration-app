@@ -5,4 +5,5 @@ object Routes {
     const val CHILDREGISTRATION = "childRegistration"
     const val SEARCHCPF = "searchCpf"
     const val STATISTICS = "statistics"
+    const val UPDATECHILD = "updateChild"
 }
