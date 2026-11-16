@@ -54,6 +54,7 @@ import com.example.clinicofkids.ui.theme.Yellow
 fun SearchForCpfScreen(
     onBackClick: () -> Unit,
     onUpdateChild: () -> Unit,
+    onUpdateGuardian: () -> Unit,
     viewModel : ChildViewModel
 ){
     var cpf by remember { mutableStateOf("") }
@@ -137,7 +138,10 @@ fun SearchForCpfScreen(
                     ChildCard(child)
                 }
             }else if(viewModel.list.isNotEmpty()){
-                guardianList(children = viewModel.list, modifier = Modifier.weight(1f).align(alignment = Alignment.CenterHorizontally))
+                guardianList(children = viewModel.list,
+                    modifier = Modifier.weight(1f).align(alignment = Alignment.CenterHorizontally), onUpdateGuardian =  onUpdateGuardian,
+                    viewModel = viewModel
+                )
             }
         }else{
             LaunchedEffect(Unit) {
@@ -151,7 +155,7 @@ fun SearchForCpfScreen(
 }
 
 @Composable
-private fun guardianList(children : List<Child>, modifier: Modifier){
+private fun guardianList(children : List<Child>, modifier: Modifier, onUpdateGuardian: () -> Unit, viewModel: ChildViewModel){
     LazyColumn(modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -184,7 +188,10 @@ private fun guardianList(children : List<Child>, modifier: Modifier){
                 Row(modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    Button(onClick = {},
+                    Button(onClick = {
+                        viewModel.child = children
+                        onUpdateGuardian()
+                    },
                         modifier = Modifier.height(35.dp),
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Yellow,
