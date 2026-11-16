@@ -64,6 +64,17 @@ class ChildViewModel(
         }
     }
 
+    fun updateChild(childUpdate: Child){
+        viewModelScope.launch {
+            try {
+                repository.updateChild(childUpdate)
+                message = "Child updated successfully!"
+            }catch (e : Exception){
+                Log.e("ChildViewModel", "Update failed", e)
+            }
+        }
+    }
+
     fun clearMessage(){
         message = ""
     }
