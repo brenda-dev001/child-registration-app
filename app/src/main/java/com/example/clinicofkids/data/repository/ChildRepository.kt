@@ -21,4 +21,8 @@ class ChildRepository(
     suspend fun getGuardianByCpf(cpf: String) : List<Child>{
         return childDao.getGuardianByCpf(cpf)
     }
+
+    suspend fun updateChild(child: Child){
+        return childDao.updateChild(child)
+    }
 }
