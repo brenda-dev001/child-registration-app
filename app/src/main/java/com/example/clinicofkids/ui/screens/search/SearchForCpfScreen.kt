@@ -135,7 +135,7 @@ fun SearchForCpfScreen(
         if(isSearching){
             if(viewModel.child != null && viewModel.list.isEmpty()){
                 viewModel.child?.let { child ->
-                    ChildCard(child)
+                    ChildCard(child, viewModel, onUpdateChild)
                 }
             }else if(viewModel.list.isNotEmpty()){
                 guardianList(children = viewModel.list,
@@ -294,7 +294,7 @@ private fun ChildList(children : List<Child>, modifier: Modifier,
     }
 }
 @Composable
-private fun ChildCard(child: Child){
+private fun ChildCard(child: Child, viewModel : ChildViewModel, onUpdateChild: () -> Unit){
 
     Box(modifier = Modifier.fillMaxWidth()){
         Column(
@@ -326,7 +326,10 @@ private fun ChildCard(child: Child){
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                Button(onClick = {},
+                Button(onClick = {
+                    viewModel.child = child
+                    onUpdateChild()
+                },
                     modifier = Modifier.height(35.dp),
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Yellow,
