@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.clinicofkids.ui.screens.child.ChildRegistrationScreen
 import com.example.clinicofkids.ui.screens.child.ChildViewModel
+import com.example.clinicofkids.ui.screens.child.UpdateChildScreen
 import com.example.clinicofkids.ui.screens.home.MenuScreen
 import com.example.clinicofkids.ui.screens.search.SearchForCpfScreen
 import com.example.clinicofkids.ui.screens.statistics.StatisticsScreen
@@ -48,6 +49,9 @@ fun AppNavigation(
                 onBackClick = {
                     navController.popBackStack()
                 },
+                onUpdateChild = {
+                    navController.navigate(Routes.UPDATECHILD)
+                },
                 viewModel = viewModel
             )
         }
@@ -56,6 +60,15 @@ fun AppNavigation(
                 onBackClick = {
                     navController.popBackStack()
                 }
+            )
+        }
+
+        composable(Routes.UPDATECHILD){
+            UpdateChildScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                viewModel = viewModel
             )
         }
     }
