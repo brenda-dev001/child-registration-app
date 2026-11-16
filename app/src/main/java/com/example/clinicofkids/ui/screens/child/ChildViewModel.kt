@@ -75,6 +75,29 @@ class ChildViewModel(
         }
     }
 
+    fun updateGuardian(guardianCpf: String,
+                       newName: String,
+                       newEmail: String,
+                       newPhone: String){
+        viewModelScope.launch {
+            try {
+                val children = repository.getAll()
+                children.filter { it.guardianCpf == guardianCpf }
+                    .forEach { child ->
+                        val updatedChild = child.copy(
+                            guardianName = newName,
+                            guardianEmail = newEmail,
+                            guardianPhone = newPhone
+                        )
+                        repository.updateChild(updatedChild)
+                    }
+                message = "Guardian updated successfully!"
+            }catch (e : Exception){
+                Log.e("ChildViewModel", "Update failed", e)
+            }
+        }
+    }
+
     fun clearMessage(){
         message = ""
     }
