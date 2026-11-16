@@ -3,6 +3,7 @@ package com.example.clinicofkids.data.local.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.clinicofkids.data.model.Child
 
 @Dao
@@ -18,5 +19,8 @@ interface ChildDao {
 
     @Query("SELECT * FROM tb_children WHERE guardianCpf = :cpf")
     suspend fun getGuardianByCpf(cpf: String) : List<Child>
+
+    @Update
+    suspend fun updateChild(child: Child)
 
 }
