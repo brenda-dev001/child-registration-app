@@ -84,7 +84,7 @@ fun MenuScreen(
             ) {
                 Text(text = "Search for CPF", fontSize = 17.sp)
             }
-            Button(onClick = {onStatisticsClick},
+            Button(onClick = {onStatisticsClick()},
                 modifier = Modifier.fillMaxWidth(0.7f)
                     .padding(10.dp),
                 shape = RoundedCornerShape(10.dp),
