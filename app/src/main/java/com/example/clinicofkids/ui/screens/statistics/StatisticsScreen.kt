@@ -83,7 +83,19 @@ fun StatisticsScreen(
             .padding(all = 10.dp)
             .align(alignment = Alignment.CenterHorizontally)
         ) {
+            LaunchedEffect(Unit) {
+                viewModel.totalChildren()
+            }
 
+            Row() {
+                Text(text = "Total number of children : ", fontSize = 16.sp)
+                Text(text = viewModel.countChildren.toString(), fontSize = 16.sp, color = Green)
+            }
+            Spacer(modifier = Modifier.size(15.dp))
+            Row(){
+                Text(text = "Average age : ", fontSize = 16.sp)
+                Text(text = "", fontSize = 16.sp, color = Green)
+            }
         }
     }
 }
