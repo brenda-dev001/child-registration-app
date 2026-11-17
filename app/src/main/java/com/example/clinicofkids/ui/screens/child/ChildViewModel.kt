@@ -25,6 +25,8 @@ class ChildViewModel(
     var child by mutableStateOf<Child?>(null)
     var countChildren by mutableIntStateOf(0)
         private set
+    var avgChildren by mutableStateOf<Double?>(0.0)
+        private set
 
     fun insertChild(child: Child){
         viewModelScope.launch {
@@ -121,6 +123,12 @@ class ChildViewModel(
     fun totalChildren(){
         viewModelScope.launch {
             countChildren = repository.totalChildren()
+        }
+    }
+
+    fun avarageAgeChildren(){
+        viewModelScope.launch {
+            avgChildren = repository.avarageAgeChildren() ?: 0.0
         }
     }
 

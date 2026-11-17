@@ -33,4 +33,8 @@ class ChildRepository(
     suspend fun totalChildren(): Int{
         return childDao.totalChildren()
     }
+
+    suspend fun avarageAgeChildren(): Double?{
+        return childDao.avarageAgeChildren()
+    }
 }

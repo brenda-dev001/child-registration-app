@@ -30,4 +30,7 @@ interface ChildDao {
     @Query("SELECT COUNT(*) FROM tb_children")
     suspend fun totalChildren():Int
 
+    @Query("SELECT AVG(age) FROM tb_children")
+    suspend fun avarageAgeChildren(): Double?
+
 }
