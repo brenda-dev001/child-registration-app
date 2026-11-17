@@ -23,6 +23,8 @@ class ChildViewModel(
         private set
 
     var child by mutableStateOf<Child?>(null)
+    var countChildren by mutableIntStateOf(0)
+        private set
 
     fun insertChild(child: Child){
         viewModelScope.launch {
@@ -113,6 +115,12 @@ class ChildViewModel(
                 message = "Error deleting child!"
                 Log.e("ChildViewModel", "Delete failed", e)
             }
+        }
+    }
+
+    fun totalChildren(){
+        viewModelScope.launch {
+            countChildren = repository.totalChildren()
         }
     }
 
