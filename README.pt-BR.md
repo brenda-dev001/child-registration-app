@@ -15,10 +15,21 @@ Aplicativo Android desenvolvido como projeto acadêmico durante minha graduaçã
 - Exibição de estatísticas, incluindo a quantidade total de crianças cadastradas e a média de idade.
 - Persistência local dos dados utilizando Room Database.
 
-## 🛠️ Tecnologias Utilizadas
 
-\<p align="center">   \<img src="[https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg)" width="40" height="40" alt="Kotlin" title="Kotlin" />   &nbsp;   \<img src="[https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg)" width="40" height="40" alt="Android" title="Android" />   &nbsp;   \<img src="[https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetpackcompose/jetpackcompose-original.svg](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetpackcompose/jetpackcompose-original.svg)" width="40" height="40" alt="Jetpack Compose" title="Jetpack Compose" />   &nbsp;   \<img src="[https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg)" width="40" height="40" alt="SQLite" title="SQLite" />   &nbsp;   \<img src="[https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg](https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg)" width="40" height="40" alt="Android Studio" title="Android Studio" /> \</p>
+## 🛠️ Technologies Used
 
+
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" width="40" height="40" alt="Kotlin" title="Kotlin" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/android/android-original.svg" width="40" height="40" alt="Android" title="Android" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jetpackcompose/jetpackcompose-original.svg" width="40" height="40" alt="Jetpack Compose" title="Jetpack Compose" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" width="40" height="40" alt="SQLite" title="SQLite" />
+  &nbsp;
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg" width="40" height="40" alt="Android Studio" title="Android Studio" />
+</p>
 
 ## ⚙️ Como Funciona
 
