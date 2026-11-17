@@ -86,6 +86,9 @@ fun StatisticsScreen(
             LaunchedEffect(Unit) {
                 viewModel.totalChildren()
             }
+            LaunchedEffect(Unit) {
+                viewModel.avarageAgeChildren()
+            }
 
             Row() {
                 Text(text = "Total number of children : ", fontSize = 16.sp)
@@ -94,7 +97,7 @@ fun StatisticsScreen(
             Spacer(modifier = Modifier.size(15.dp))
             Row(){
                 Text(text = "Average age : ", fontSize = 16.sp)
-                Text(text = "", fontSize = 16.sp, color = Green)
+                Text(text = "${viewModel.avgChildren?.toInt()}", fontSize = 16.sp, color = Green)
             }
         }
     }
