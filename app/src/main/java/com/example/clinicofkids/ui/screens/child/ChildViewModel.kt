@@ -2,6 +2,8 @@ package com.example.clinicofkids.ui.screens.child
 
 import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -98,6 +100,26 @@ class ChildViewModel(
         }
     }
 
+    fun deleteChild(child: Child) {
+        viewModelScope.launch {
+            try {
+                repository.deleteChild(child)
+                if(this@ChildViewModel.child?.cpf == child.cpf){
+                    this@ChildViewModel.child = null
+                }
+                list = list.filter { it.cpf != child.cpf }
+                message = "Child deleted successfully!"
+            } catch (e: Exception) {
+                message = "Error deleting child!"
+                Log.e("ChildViewModel", "Delete failed", e)
+            }
+        }
+    }
+
+    fun clearSearch() {
+        child = null
+        list = emptyList()
+    }
     fun clearMessage(){
         message = ""
     }
