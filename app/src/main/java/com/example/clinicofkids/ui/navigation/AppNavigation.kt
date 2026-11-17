@@ -63,7 +63,8 @@ fun AppNavigation(
             StatisticsScreen(
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
+                viewModel = viewModel
             )
         }
 
