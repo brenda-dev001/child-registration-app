@@ -1,6 +1,5 @@
 package com.example.clinicofkids.ui.screens.statistics
 
-import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,13 +22,9 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.clinicofkids.ui.screens.child.ChildViewModel
-import com.example.clinicofkids.ui.theme.AccentCoral
-import com.example.clinicofkids.ui.theme.AccentYellow
 import com.example.clinicofkids.ui.theme.Background
 import com.example.clinicofkids.ui.theme.Blue
 import com.example.clinicofkids.ui.theme.Green
