@@ -27,4 +27,7 @@ interface ChildDao {
     @Delete
     suspend fun deleteChild(child: Child)
 
+    @Query("SELECT COUNT(*) FROM tb_children")
+    suspend fun totalChildren():Int
+
 }
