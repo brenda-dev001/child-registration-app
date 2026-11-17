@@ -1,5 +1,6 @@
 package com.example.clinicofkids.ui.screens.search
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -33,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -59,6 +61,7 @@ fun SearchForCpfScreen(
 ){
     var cpf by remember { mutableStateOf("") }
     var isSearching by remember { mutableStateOf(false) }
+    var context = LocalContext.current
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -113,9 +116,10 @@ fun SearchForCpfScreen(
             Spacer(modifier = Modifier.size(10.dp))
             Button(onClick = {
                 if(cpf.isNotBlank()){
-                    isSearching = true
+                    viewModel.clearSearch()
                     viewModel.getChildByCpf(cpf)
                     viewModel.getGuardianByCpf(cpf)
+                    isSearching = true
                 }else{
                     isSearching = false
                 }
@@ -133,7 +137,7 @@ fun SearchForCpfScreen(
             }
         }
         if(isSearching){
-            if(viewModel.child != null && viewModel.list.isEmpty()){
+            if(viewModel.child != null){
                 viewModel.child?.let { child ->
                     ChildCard(child, viewModel, onUpdateChild)
                 }
@@ -151,6 +155,10 @@ fun SearchForCpfScreen(
                 onUpdateChild = onUpdateChild, viewModel = viewModel)
         }
         Spacer(modifier = Modifier.size(10.dp))
+        if (viewModel.message.isNotEmpty()){
+            Toast.makeText(context, viewModel.message, Toast.LENGTH_LONG).show()
+            viewModel.clearMessage()
+        }
     }
 }
 
@@ -205,19 +213,6 @@ private fun guardianList(children : List<Child>, modifier: Modifier, onUpdateGua
                         Text(text = "Edit")
                     }
                     Spacer(modifier = Modifier.size(5.dp))
-                    Button(onClick = {},
-                        modifier = Modifier.height(35.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            contentColor = Coral,
-                            containerColor = AccentCoral
-                        ),
-                        elevation = ButtonDefaults.buttonElevation(
-                            defaultElevation = 2.dp
-                        ),
-                        shape = RoundedCornerShape(10.dp)
-                    ) {
-                        Text(text = "Delete")
-                    }
                 }
             }
         }
@@ -275,7 +270,9 @@ private fun ChildList(children : List<Child>, modifier: Modifier,
                         Text(text = "Edit")
                     }
                     Spacer(modifier = Modifier.size(5.dp))
-                    Button(onClick = {},
+                    Button(onClick = {
+                        viewModel.deleteChild(children)
+                    },
                         modifier = Modifier.height(35.dp),
                         colors = ButtonDefaults.buttonColors(
                             contentColor = Coral,
@@ -343,7 +340,9 @@ private fun ChildCard(child: Child, viewModel : ChildViewModel, onUpdateChild: (
                     Text(text = "Edit")
                 }
                 Spacer(modifier = Modifier.size(5.dp))
-                Button(onClick = {},
+                Button(onClick = {
+                    viewModel.deleteChild(child)
+                },
                     modifier = Modifier.height(35.dp),
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Coral,
