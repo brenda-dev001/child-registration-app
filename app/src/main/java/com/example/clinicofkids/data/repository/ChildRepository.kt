@@ -25,4 +25,8 @@ class ChildRepository(
     suspend fun updateChild(child: Child){
         return childDao.updateChild(child)
     }
+
+    suspend fun deleteChild(child: Child){
+        return childDao.deleteChild(child)
+    }
 }
